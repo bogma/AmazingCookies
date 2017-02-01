@@ -1,6 +1,6 @@
 module Scout exposing (..)
 
-import Json.Decode exposing (Decoder, decodeString, succeed, string, list, int, maybe, (:=))
+import Json.Decode exposing (Decoder, decodeString, succeed, string, list, int, maybe, field)
 import Json.Decode.Extra exposing ((|:))
 
 
@@ -30,9 +30,9 @@ type alias EventJson =
 decoder : Decoder EventJson
 decoder =
     succeed EventJson
-        |: ("event" := string)
-        |: ("name" := string)
-        |: (maybe ("quantity" := int))
+        |: (field "event" string)
+        |: (field "name" string)
+        |: (maybe (field "quantity" int))
 
 
 jsonToEvent : EventJson -> Maybe EventModel

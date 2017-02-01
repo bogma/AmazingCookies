@@ -2,10 +2,10 @@ module Dashboard exposing (..)
 
 import Dict
 import Html exposing (..)
-import Html.App as Html
 import Html.Attributes exposing (style)
 import WebSocket
 import Scout
+import Tuple
 
 
 main =
@@ -31,7 +31,6 @@ type alias Model =
     , scouts : Dict.Dict String Scout.StateModel
     , events : List Scout.EventModel
     }
-
 
 init : ( Model, Cmd Msg )
 init =
@@ -130,7 +129,7 @@ viewEvent event =
 
 
 viewScout scout =
-    div [ stateStyle (snd scout) ] [ text (Scout.stateToString (fst scout) (snd scout)) ]
+    div [ stateStyle (Tuple.second scout) ] [ text (Scout.stateToString (Tuple.first scout) (Tuple.second scout)) ]
 
 
 horizontalGridStyle =
